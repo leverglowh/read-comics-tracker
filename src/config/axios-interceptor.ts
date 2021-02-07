@@ -20,7 +20,8 @@ axios.interceptors.request.use(
     }
     let PRIV_KEY = localStorage.getItem('PRIVATE_API_KEY') || '';
     if (PRIV_KEY) PRIV_KEY = JSON.parse(PRIV_KEY);
-    const PUBLIC_KEY = process.env.REACT_APP_MARVEL_PUBLIC_KEY;
+    let PUBLIC_KEY = localStorage.getItem('PUBLIC_API_KEY') || '';
+    if (PUBLIC_KEY) PUBLIC_KEY = JSON.parse(PUBLIC_KEY);
     const ts = new Date().getTime();
     const hash = MD5(ts + PRIV_KEY + process.env.REACT_APP_MARVEL_PUBLIC_KEY).toString();
     return {

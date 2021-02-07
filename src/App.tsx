@@ -13,14 +13,22 @@ import './App.scss';
 function App() {
   useEffect(() => {
     console.log('hello');
-    let key = localStorage.getItem('PRIVATE_API_KEY');
-    if (key) return;
+    let private_key = localStorage.getItem('PRIVATE_API_KEY');
+    let public_key = localStorage.getItem('PUBLIC_API_KEY');
     const regex = /^[a-z0-9]+$/;
-    while (!key) {
-      key = prompt('Need API KEY');
-      if (!key || key.length < 40 || !regex.test(key)) key = null;
+    if (!public_key) {
+      while (!public_key) {
+        public_key = prompt('Need API public key');
+      }
+      saveItemToLocalStorage('PUBLIC_API_KEY', public_key);
     }
-    saveItemToLocalStorage('PRIVATE_API_KEY', key);
+    if (!private_key) {
+      while (!private_key) {
+        private_key = prompt('Need API private key');
+        if (!private_key || private_key.length < 40 || !regex.test(private_key)) private_key = null;
+      }
+      saveItemToLocalStorage('PRIVATE_API_KEY', private_key);
+    }
   }, []);
 
   loadIcons();
