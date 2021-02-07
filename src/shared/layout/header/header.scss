@@ -1,0 +1,38 @@
+@import 'src/shared/util/variables';
+
+#header {
+  .navbar {
+    background-color: $dark-green !important;
+  }
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  box-shadow: 0px 5px 15px #27272780;
+  -webkit-box-shadow: 0px 5px 15px #27272780;
+  -moz-box-shadow: 0px 5px 15px #27272780;
+
+  z-index: 1049;
+
+  flex: 0 1 auto;
+}
+
+.header-float-right {
+  float: right;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  div {
+    margin-right: 5px;
+  }
+
+  a {
+    padding: 8px;
+    color: black;
+  }
+  a:hover {
+    color: black;
+  }
+}
