@@ -11,30 +11,26 @@ export interface ISeriesProps extends StateProps, DispatchProps {}
 
 const Series: React.FC<ISeriesProps> = (props) => {
   const [searchText, setSearchText] = useState('');
-  const [typingTimeout, setTypingTimeout] = useState<any>(0);
-
-  useEffect(() => {
-    // props.getSeriesList();
-  }, []);
 
   const handleSearchTextChange = (e) => {
-    // e.stopPropagation();
-    // if (typingTimeout) {
-    //   clearTimeout(typingTimeout);
-    // }
-
     setSearchText(e.target.value);
-    // setTypingTimeout(setTimeout(handleSearch, 500));
   };
 
   const handleSearch = () => {
     if (searchText) props.getSeriesList(searchText);
   };
 
+  const handleKeyPress = (e) => {
+    e.persist();
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div>
       <div className='search-div'>
-        <Input onChange={handleSearchTextChange} autoComplete='off' value={searchText} />
+        <Input onChange={handleSearchTextChange} autoComplete='off' value={searchText} onKeyPress={handleKeyPress} />
         &nbsp;
         <Button type='submit' color='secondary' onClick={handleSearch}>
           <FontAwesomeIcon icon='search' />
@@ -61,10 +57,10 @@ const Series: React.FC<ISeriesProps> = (props) => {
               </Link>
             </CardTitle>
             <CardBody>
-            <img
-              width='100%'
-              src={`${series.thumbnail?.path}/${IMAGE_VARIANT.LANDSCAPE.MEDIUM}.${series.thumbnail?.extension}`}
-            />
+              <img
+                width='100%'
+                src={`${series.thumbnail?.path}/${IMAGE_VARIANT.LANDSCAPE.MEDIUM}.${series.thumbnail?.extension}`}
+              />
               {series.description
                 ? series.description.substring(0, 80).replace(/\w+$/, '') + '...'
                 : 'No available description'}

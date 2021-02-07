@@ -21,6 +21,7 @@ import { login } from 'src/shared/reducers/authentication';
 import { strapiUrl } from 'src/shared/reducers/api-urls';
 
 import './login.scss';
+import { saveItemToLocalStorage } from 'src/shared/util/general-utils';
 
 export interface ILoginModalProps
   extends StateProps,
@@ -95,7 +96,7 @@ const LoginModal: React.FC<ILoginModalProps> = (props) => {
   useEffect(() => {
     if (props.loginSuccess) {
       if (loginData.rememberMe) {
-        localStorage.setItem(AUTH_TOKEN_KEY, props.idToken);
+        saveItemToLocalStorage(AUTH_TOKEN_KEY, props.idToken);
       } else {
         sessionStorage.setItem(AUTH_TOKEN_KEY, props.idToken);
       }

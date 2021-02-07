@@ -75,9 +75,6 @@ const SeriesModal: React.FC<ISeriesModalProps> = (props) => {
         ]
       });
   };
-  // TODO: use collapses to easily navigame the list of issues
-  // TODO: notify update successful
-  // TODO: order issues buy.. name?
 
   return (
     <Modal isOpen toggle={goBack}>

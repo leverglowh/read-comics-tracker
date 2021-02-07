@@ -57,7 +57,7 @@ export default (
         loading: false,
         loginError: false,
         loginSuccess: true,
-        user: { ...action.payload.data.user, comics: JSON.parse(action.payload.data.user.comics) },
+        user: { ...action.payload.data.user, comics: action.payload.data.user.comics },
         idToken: action.payload.data.jwt,
         isAuthenticated: true,
       };

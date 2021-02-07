@@ -4,6 +4,7 @@ import { useParams, useLocation, Redirect } from 'react-router';
 import { loginProvider } from 'src/shared/reducers/authentication';
 import { IRootState } from 'src/shared/reducers';
 import { AUTH_TOKEN_KEY } from 'src/config/constans';
+import { saveItemToLocalStorage } from 'src/shared/util/general-utils';
 
 export interface IConnectPageProps extends StateProps, DispatchProps {}
 
@@ -18,7 +19,7 @@ const ConnectPage: React.FC<IConnectPageProps> = (props) => {
 
   useEffect(() => {
     if (props.loginSuccess) {
-      localStorage.setItem(AUTH_TOKEN_KEY, props.idToken);
+      saveItemToLocalStorage(AUTH_TOKEN_KEY, props.idToken);
 
       setTimeout(() => setRedirect(true), 1000);
     }
