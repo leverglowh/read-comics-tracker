@@ -31,7 +31,6 @@ const SeriesModal: React.FC<ISeriesModalProps> = (props) => {
   const [comics, setComics] = useState<IComicListState>({});
   const [totalComicsCount, setTotalComicsCount] = useState(0);
   const [firstIssue, setFirstIssue] = useState(0);
-  const [lastIssue, setLastIssue] = useState(0);
   const [readList, setReadList] = useState(props.me.comics?.find((s) => s.series === Number(id))?.issues || []);
   const goBack = () => {
     history.goBack();
@@ -52,7 +51,7 @@ const SeriesModal: React.FC<ISeriesModalProps> = (props) => {
 
     return () => {
       props.resetSeriesComics();
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -76,8 +75,6 @@ const SeriesModal: React.FC<ISeriesModalProps> = (props) => {
         },
       });
       if (props.comics.offset === 0) setFirstIssue(props.comics.data[0].issueNumber || 1);
-      if (props.comics.count - props.comics.offset <= 20)
-        setLastIssue(props.comics.data[props.comics.data.length - 1].issueNumber || 1);
     }
     setTotalComicsCount(props.comics.count || 0);
   }, [props.comics]);
@@ -154,7 +151,8 @@ const SeriesModal: React.FC<ISeriesModalProps> = (props) => {
               <Accordion key={index} activeKey={activeKey}>
                 <Card>
                   <Accordion.Toggle as={Card.Header} eventKey={index + ''} onClick={() => handleExpand(index + '')}>
-                    Issues #{index * 20 + firstIssue} - #{Math.min(index * 20 + (firstIssue + 19), lastIssue)}
+                    Issues #{index * 20 + firstIssue} - #
+                    {Math.min(index * 20 + (firstIssue + 19), totalComicsCount)}
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey={index + ''}>
                     <Card.Body>

@@ -66,7 +66,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
           {props.isAuthenticated ? (
             <Dropdown navbar show={isAccountMenuOpen} onToggle={toggleAccountMenu}>
               <Dropdown.Toggle id={props.user.username}>{props.user.username}</Dropdown.Toggle>
-              <Dropdown.Menu>
+              <Dropdown.Menu align="right">
                 <Dropdown.Item>
                   <Link className='nav-link' to='/logout'>
                     logout
