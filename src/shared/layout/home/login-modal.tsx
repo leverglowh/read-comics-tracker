@@ -127,13 +127,6 @@ const LoginModal: React.FC<ILoginModalProps> = (props) => {
                 src={`${process.env.PUBLIC_URL}/providers/google.png`}
                 alt='login with google'
               />
-              <img
-                id='login-discord'
-                onClick={loginDiscord}
-                style={{ width: 191, height: 46 }}
-                src={`${process.env.PUBLIC_URL}/providers/discord.png`}
-                alt='login with discord'
-              />
             </div>
             <div className='text-or'>or</div>
           </div>

@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'src/shared/reducers';
-import {
-  Navbar,
-  NavbarBrand,
-  NavLink,
-  Nav,
-  NavItem,
-  Dropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem /* UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText */,
-} from 'reactstrap';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import Dropdown from 'react-bootstrap/Dropdown';
 import { Link } from 'react-router-dom';
 
 import { getMe } from 'src/shared/reducers/authentication';
@@ -32,27 +24,24 @@ const Header: React.FC<IHeaderProps> = (props) => {
 
   return (
     <div id='header'>
-      <Navbar color='light' light expand>
-        <NavbarBrand href='/'>ComicsREAD</NavbarBrand>
+      <Navbar bg='light' expand>
+        <Navbar.Brand href='/'>ComicsREAD</Navbar.Brand>
         <Nav className='mr-auto' navbar>
-          <NavItem>
+          <Nav.Item>
             <Link className='nav-link' to='/characters'>
               Characters
             </Link>
-          </NavItem>
-          <NavItem>
+          </Nav.Item>
+          <Nav.Item>
             <Link className='nav-link' to='/series'>
               Series
             </Link>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              href='https://github.com/leverglowh/read-comics-tracker'
-              target='_blank'
-            >
+          </Nav.Item>
+          <Nav.Item>
+            <Link className='nav-link' to='https://github.com/leverglowh/read-comics-tracker' target='_blank'>
               GitHub
-            </NavLink>
-          </NavItem>
+            </Link>
+          </Nav.Item>
           {/*
           <UncontrolledDropdown nav inNavbar>
             <DropdownToggle nav caret>
@@ -75,17 +64,15 @@ const Header: React.FC<IHeaderProps> = (props) => {
         </Nav>
         <div className='header-float-right'>
           {props.isAuthenticated ? (
-            <Dropdown isOpen={isAccountMenuOpen} toggle={toggleAccountMenu}>
-              <DropdownToggle nav caret>
-                {props.user.username}
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>
+            <Dropdown navbar show={isAccountMenuOpen} onToggle={toggleAccountMenu}>
+              <Dropdown.Toggle id={props.user.username}>{props.user.username}</Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item>
                   <Link className='nav-link' to='/logout'>
                     logout
                   </Link>
-                </DropdownItem>
-              </DropdownMenu>
+                </Dropdown.Item>
+              </Dropdown.Menu>
             </Dropdown>
           ) : (
             <div>
@@ -103,11 +90,11 @@ const Header: React.FC<IHeaderProps> = (props) => {
 
 const mapStateToProps = ({ authentication }: IRootState) => ({
   user: authentication.user,
-  isAuthenticated: authentication.isAuthenticated
+  isAuthenticated: authentication.isAuthenticated,
 });
 
 const mapDispatchToProps = {
-  getMe
+  getMe,
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

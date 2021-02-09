@@ -29,3 +29,6 @@ tslint-to-eslint-config.log
 
 # vscode
 /.vscode
+
+# other
+WIPreact_strap_login.tsx

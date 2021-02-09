@@ -29,6 +29,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
     "react-select": "^4.0.2",
+    "reactstrap": "^8.9.0",
     "redux": "^4.0.5",
     "redux-promise-middleware": "^6.1.2",
     "typescript": "^3.9.7"

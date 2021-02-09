@@ -8,7 +8,7 @@ import loggerMiddleware from 'src/config/logger-middleware';
 import rootReducer from 'src/shared/reducers/index';
 import 'src/config/axios-interceptor';
 
-import { Spinner } from 'reactstrap';
+import Spinner from 'react-bootstrap/Spinner';
 
 import App from './App';
 
