@@ -47,7 +47,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
           </NavItem>
           <NavItem>
             <NavLink
-              href=''
+              href='https://github.com/leverglowh/read-comics-tracker'
               target='_blank'
             >
               GitHub

@@ -23,7 +23,7 @@ axios.interceptors.request.use(
     let PUBLIC_KEY = localStorage.getItem('PUBLIC_API_KEY') || '';
     if (PUBLIC_KEY) PUBLIC_KEY = JSON.parse(PUBLIC_KEY);
     const ts = new Date().getTime();
-    const hash = MD5(ts + PRIV_KEY + process.env.REACT_APP_MARVEL_PUBLIC_KEY).toString();
+    const hash = MD5(ts + PRIV_KEY + PUBLIC_KEY).toString();
     return {
       ...config,
       params: { ...config.params, ts, apikey: PUBLIC_KEY, hash },
@@ -40,7 +40,7 @@ axios.interceptors.response.use(
     if (!response?.config?.url?.includes(BASE_MARVEL_URL)) return response;
     // caching response
     const parsedURL = encodeURI(response.config.url || '');
-    saveItemToLocalStorage(parsedURL, JSON.stringify(response));
+    saveItemToLocalStorage(parsedURL, response);
     return response;
   },
   (error) => {

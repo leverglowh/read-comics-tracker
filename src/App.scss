@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap');
 @import './shared/util/variables';
+@import "~bootstrap/scss/bootstrap";
 
 html,
 body {
@@ -41,6 +42,12 @@ body {
   height: 2rem;
 }
 
+.modal-loading-section {
+  height: 2rem;
+  position: absolute;
+  left: 0;
+}
+
 // shared css
 .single-char {
   flex: 2 1 300px;
@@ -48,6 +55,9 @@ body {
     height: 25px;
     margin: 0;
     vertical-align: middle;
+    a {
+      color: #495057;
+    }
   }
 }
 
