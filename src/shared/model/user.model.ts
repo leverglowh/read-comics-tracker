@@ -17,6 +17,7 @@ export interface IUser {
 
 export interface IReadComics {
   series: number;
+  datetime: string;
   issues: number[];
 }
 

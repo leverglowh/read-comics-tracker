@@ -22,6 +22,12 @@ const Header: React.FC<IHeaderProps> = (props) => {
     setAccountMenuOpen(!isAccountMenuOpen);
   };
 
+  const refresh = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.reload();
+  };
+
   return (
     <div id='header'>
       <Navbar bg='light' expand>
@@ -66,7 +72,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
           {props.isAuthenticated ? (
             <Dropdown navbar show={isAccountMenuOpen} onToggle={toggleAccountMenu}>
               <Dropdown.Toggle id={props.user.username}>{props.user.username}</Dropdown.Toggle>
-              <Dropdown.Menu align="right">
+              <Dropdown.Menu align='right'>
                 <Dropdown.Item>
                   <Link className='nav-link' to='/logout'>
                     logout
@@ -81,6 +87,13 @@ const Header: React.FC<IHeaderProps> = (props) => {
               </Link>
             </div>
           )}
+          <img
+            onClick={refresh}
+            id='refresh-but'
+            src={process.env.PUBLIC_URL + '/svg/refresh.svg'}
+            alt='refresh'
+            width='20px'
+          />
         </div>
         {/* <NavbarText>Simple Text</NavbarText> */}
       </Navbar>

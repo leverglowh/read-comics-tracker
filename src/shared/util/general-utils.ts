@@ -1,4 +1,5 @@
 import { BASE_MARVEL_URL } from 'src/shared/reducers/api-urls';
+import { IReadComics } from 'src/shared/model/user.model';
 
 export const capitalizeFirst = (str: string) => {
   const strs: string[] = [];
@@ -20,4 +21,13 @@ export const saveItemToLocalStorage = (key: string, item: any) => {
       return saveItemToLocalStorage(key, item);
     }
   }
+};
+
+export const sortReadComicsByDate = (a: IReadComics, b: IReadComics) => {
+  const dateA = new Date(a.datetime);
+  const dateB = new Date(b.datetime);
+
+  if (dateA.getTime() < dateB.getTime()) return 1;
+  if (dateA.getTime() > dateB.getTime()) return -1;
+  return 0;
 };

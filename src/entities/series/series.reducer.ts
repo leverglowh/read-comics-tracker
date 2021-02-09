@@ -127,6 +127,14 @@ export const getEntities = (titleStartsWith: string = '', page: number = 0) => {
   };
 };
 
+export const getMySeries = (comicsList: number[]) => {
+  const requestUrl = apiUrl + `?comics=${comicsList.join('%2C')}`;
+  return {
+    type: ACTION_TYPES.FETCH_SERIES_LIST,
+    payload: axios.get<ISeries>(requestUrl),
+  };
+}
+
 export const getSeriesComics = (seriesId: number, page: number = 0) => {
   if (!seriesId) {
     alert('seriesId error');

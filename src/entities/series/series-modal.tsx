@@ -108,6 +108,7 @@ const SeriesModal: React.FC<ISeriesModalProps> = (props) => {
         ...oldListWithoutCurrent,
         {
           series: Number(id),
+          datetime: (new Date).toISOString(),
           issues: readList,
         },
       ],

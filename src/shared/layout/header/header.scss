@@ -45,4 +45,14 @@
       background-color: transparent !important;
     }
   }
+
+  #refresh-but {
+    cursor: pointer;
+    -webkit-transition: -webkit-transform .8s ease-in-out;
+            transition:         transform .8s ease-in-out;
+  }
+  #refresh-but:hover {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
 }
