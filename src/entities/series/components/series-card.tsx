@@ -5,7 +5,7 @@ import { ISeries } from 'src/shared/model/series.model';
 import { IMAGE_VARIANT } from 'src/shared/reducers/api-urls';
 
 export interface ISingleSeriesCardProps {
-  series: ISeries
+  series: ISeries;
 }
 
 const SingleSeriesCard: React.FC<ISingleSeriesCardProps> = (props) => {
@@ -13,7 +13,11 @@ const SingleSeriesCard: React.FC<ISingleSeriesCardProps> = (props) => {
   return (
     <Card className='single-char' key={series.id}>
       <Card.Title>
-        <Link to={`series/${series.id}`}>
+        <Link
+          to={(location) =>
+            location.pathname.endsWith('series') ? `${location.pathname}/${series.id}` : `/home/series/${series.id}`
+          }
+        >
           <div>{series.title}</div>
         </Link>
       </Card.Title>

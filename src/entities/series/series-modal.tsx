@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'src/shared/reducers';
 import Form from 'react-bootstrap/Form';
@@ -9,11 +9,12 @@ import Table from 'react-bootstrap/Table';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import { useHistory, useParams } from 'react-router-dom';
-import { updateUser } from 'src/shared/reducers/authentication';
+import { updateUser, resetUpdate } from 'src/shared/reducers/authentication';
 import { getEntity as getSeriesById, getSeriesComics, resetSeriesComics } from 'src/entities/series/series.reducer';
 import { IMAGE_VARIANT } from 'src/shared/reducers/api-urls';
 import { ISeries } from 'src/shared/model/series.model';
 import { IComic } from 'src/shared/model/comic.model';
+import { toast } from 'react-toastify';
 
 export interface ISeriesModalProps extends StateProps, DispatchProps {}
 
@@ -32,6 +33,7 @@ const SeriesModal: React.FC<ISeriesModalProps> = (props) => {
   const [totalComicsCount, setTotalComicsCount] = useState(0);
   const [firstIssue, setFirstIssue] = useState(0);
   const [readList, setReadList] = useState(props.me.comics?.find((s) => s.series === Number(id))?.issues || []);
+  const toastId = useRef(null);
   const goBack = () => {
     history.goBack();
   };
@@ -85,6 +87,21 @@ const SeriesModal: React.FC<ISeriesModalProps> = (props) => {
     }
   }, [props.me]);
 
+  useEffect(() => {
+    if (props.updateSuccess) {
+      props.resetUpdate();
+      // @ts-ignore
+      if (toast.isActive(toastId.current)) {
+        // @ts-ignore
+        toast.dismiss(toastId.current);
+      }
+      // @ts-ignore
+      toastId.current = toast('Update success!', {
+        type: toast.TYPE.SUCCESS,
+      });
+    }
+  }, [props.updateSuccess]);
+
   const handleRowCheck = (e) => {
     e.persist();
     const id = Number(e.target.id);
@@ -108,10 +125,10 @@ const SeriesModal: React.FC<ISeriesModalProps> = (props) => {
         ...oldListWithoutCurrent,
         {
           series: Number(id),
-          datetime: (new Date).toISOString(),
+          datetime: new Date().toISOString(),
           issues: readList,
         },
-      ],
+      ].filter((c) => c.issues.length > 0),
     });
   };
 
@@ -151,9 +168,14 @@ const SeriesModal: React.FC<ISeriesModalProps> = (props) => {
             {[...Array(Math.ceil(totalComicsCount / 20))].map((el, index) => (
               <Accordion key={index} activeKey={activeKey}>
                 <Card>
-                  <Accordion.Toggle as={Card.Header} eventKey={index + ''} onClick={() => handleExpand(index + '')}>
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    className='accordion-toggle'
+                    eventKey={index + ''}
+                    onClick={() => handleExpand(index + '')}
+                  >
                     Issues #{index * 20 + firstIssue} - #
-                    {Math.min(index * 20 + (firstIssue + 19), totalComicsCount)}
+                    {Math.min(index * 20 + (firstIssue + 19), totalComicsCount + firstIssue - 1)}
                   </Accordion.Toggle>
                   <Accordion.Collapse eventKey={index + ''}>
                     <Card.Body>
@@ -220,6 +242,7 @@ const mapStateToProps = ({ authentication, series }: IRootState) => ({
 
 const mapDispatchToProps = {
   updateUser,
+  resetUpdate,
   getSeriesById,
   getSeriesComics,
   resetSeriesComics,

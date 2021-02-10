@@ -5,9 +5,9 @@ import Routes from './routes';
 
 import { loadIcons } from './config/icon-loader';
 import Header from './shared/layout/header/header';
+import { ToastContainer } from 'react-toastify';
 import { saveItemToLocalStorage } from 'src/shared/util/general-utils';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 
 function App() {
@@ -37,7 +37,15 @@ function App() {
     <div className='App'>
       <Router>
         <Header />
-        <Routes />
+        <>
+          <Routes />
+          <ToastContainer
+            position='top-left'
+            autoClose={2000}
+            progressClassName="toast-progress"
+            bodyClassName="toast-body"
+          />
+        </>
       </Router>
     </div>
   );

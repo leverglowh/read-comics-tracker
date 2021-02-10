@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import LoginModal from './shared/layout/home/login-modal';
 import Logout from './shared/layout/home/logout';
@@ -9,11 +9,15 @@ import ConnectPage from './shared/auth/connect/connect-page';
 
 import Character from 'src/entities/character/character';
 import Series from 'src/entities/series/index';
+import SeriesModal from 'src/entities/series/series-modal';
+
+const RedirectToHome = () => <Redirect to="/home" />;
 
 const Routes = () => (
   <div id='route-container'>
     <Switch>
-      <Route exact path={['/', '/login', '/register']}>
+      <Route exact path="/" component={RedirectToHome} />
+      <Route exact path={['/home', '/home/series/:id', '/login', '/register']}>
         <Home />
       </Route>
       <Route path='/logout'>
@@ -32,6 +36,9 @@ const Routes = () => (
     </Switch>
       <Route path='/login'>
         <LoginModal />
+      </Route>
+      <Route path='/home/series/:id' exact>
+        <SeriesModal />
       </Route>
   </div>
 );

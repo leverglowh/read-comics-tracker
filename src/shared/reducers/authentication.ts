@@ -15,6 +15,7 @@ export const ACTION_TYPES = {
   REGISTER: 'authentication/REGISTER',
   GET_USER_INFORMATION: 'authentication/USER',
   UPDATE_USER: 'authentication/UPDATE_USER',
+  RESET_UPDATE: 'authentication/RESET_UPDATE',
   ERROR_MESSAGE: 'authentication/ERROR_MESSAGE',
 };
 
@@ -120,6 +121,11 @@ export default (
         updateSuccess: true,
         user: action.payload.data,
       };
+    case ACTION_TYPES.RESET_UPDATE:
+      return {
+        ...state,
+        updateSuccess: false
+      };
     case ACTION_TYPES.LOGOUT:
       return {
         ...initialState,
@@ -191,6 +197,10 @@ export const clearAuthToken = () => {
     sessionStorage.removeItem(AUTH_TOKEN_KEY);
   }
 };
+
+export const resetUpdate = () => ({
+  type: ACTION_TYPES.RESET_UPDATE,
+});
 
 export const logout = () => {
   clearAuthToken();

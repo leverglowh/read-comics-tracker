@@ -22,6 +22,19 @@ body {
   font-family: 'ZCOOL KuaiLe', cursive;
 }
 
+.Toastify__toast--success {
+  background: white !important;
+  color: black;
+}
+
+.Toastify__close-button {
+  color: black !important;
+}
+
+.toast-progress {
+  background: #85c7a0 !important;
+}
+
 #route-container {
   padding: 20px;
   padding-top: 76px;
@@ -79,6 +92,10 @@ body {
     margin: 0;
     padding: 0.75rem;
   }
+}
+
+.accordion-toggle {
+  cursor: pointer;
 }
 
 $breakpoint-tablet: 768px;
