@@ -18,6 +18,7 @@ const Series: React.FC<ISeriesProps> = (props) => {
     itemsCount: 0,
   });
   const [searchText, setSearchText] = useState('');
+  const [showNoResults, setShowNoResults] = useState(false);
 
   /**
    * Resets all fetched series data.
@@ -35,7 +36,14 @@ const Series: React.FC<ISeriesProps> = (props) => {
     })
   }, [props.seriesList]);
 
+  useEffect(() => {
+    if (searchText && !props.seriesList.length && !props.loading) {
+      setShowNoResults(true);
+    }
+  }, [props.seriesList]);
+
   const handleSearchTextChange = (e) => {
+    setShowNoResults(false);
     setSearchText(e.target.value);
   };
 
@@ -84,6 +92,11 @@ const Series: React.FC<ISeriesProps> = (props) => {
         {props.seriesList?.map((series) => (
           <SingleSeriesCard key={series.id} series={series} />
         ))}
+        {showNoResults && (
+          <div className="no-results">
+            <i>Looks like there's no results for {searchText}, try something else!</i>
+          </div>
+        )}
         <PaginationBar {...pagination} handlePageSelection={handlePageSelection}/>
       </div>
     </div>
