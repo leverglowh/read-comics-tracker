@@ -16,6 +16,7 @@ export interface IPaginationBarProps {
 }
 
 export const PaginationBar: React.FC<IPaginationBarProps> = (props) => {
+  if (!props.itemsCount) return null;
   const { currentPage, itemsCount, location } = props; // current page is 0 when page 1 is selected
   const pagesCount = Math.ceil(itemsCount / ITEMS_PER_PAGE);
   const handlePageSelection = (e) => {
