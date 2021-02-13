@@ -81,7 +81,7 @@ const RegisterModal: React.FC<IregisterModalProps> = (props) => {
 
   useEffect(() => {
     if (props.registerSuccess) {
-      sessionStorage.setItem(AUTH_TOKEN_KEY, props.idToken);
+      sessionStorage.setItem(AUTH_TOKEN_KEY, JSON.stringify(props.idToken));
       setTimeout(() => handleClose(null), 1000);
     }
   }, [props.registerError, props.registerSuccess]);
@@ -96,7 +96,7 @@ const RegisterModal: React.FC<IregisterModalProps> = (props) => {
     >
       <Form id='register-form' onSubmit={handleSubmit}>
         <ModalHeader id='register-title' toggle={handleClose}>
-          register
+          Register
         </ModalHeader>
         <ModalBody>
           {props.registerError ? (
@@ -138,7 +138,7 @@ const RegisterModal: React.FC<IregisterModalProps> = (props) => {
             <FormFeedback>Should not be empty</FormFeedback>
           </FormGroup>
           <FormGroup>
-            <Label for='register-email'>Password</Label>
+            <Label for='register-email'>Email</Label>
             <Input
               type='email'
               name='email'
@@ -159,7 +159,7 @@ const RegisterModal: React.FC<IregisterModalProps> = (props) => {
             tabIndex={1}
             disabled={props.registerSuccess}
           >
-            Annulla
+            Cancel
           </Button>{' '}
           <Button
             color='primary'
@@ -167,7 +167,7 @@ const RegisterModal: React.FC<IregisterModalProps> = (props) => {
             onClick={handleSubmit}
             disabled={props.registerSuccess}
           >
-            register
+            Register
           </Button>
         </ModalFooter>
       </Form>

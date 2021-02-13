@@ -23,9 +23,6 @@ const Routes = () => (
       <Route path='/logout'>
         <Logout />
       </Route>
-      <Route path='/register'>
-        <RegisterModal />
-      </Route>
       <Route exact path='/connect/:provider'>
         <ConnectPage />
       </Route>
@@ -36,6 +33,9 @@ const Routes = () => (
     </Switch>
       <Route path='/login'>
         <LoginModal />
+      </Route>
+      <Route path='/register'>
+        <RegisterModal />
       </Route>
       <Route path='/home/series/:id' exact>
         <SeriesModal />

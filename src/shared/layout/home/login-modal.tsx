@@ -32,7 +32,7 @@ const LoginModal: React.FC<ILoginModalProps> = (props) => {
   const [loginData, setLoginData] = useState({
     username: '',
     password: '',
-    rememberMe: false,
+    rememberMe: true,
   });
   const [invalidUsername, setInvalidUsername] = useState(false);
   const [invalidPassword, setInvalidPassword] = useState(false);
@@ -46,7 +46,6 @@ const LoginModal: React.FC<ILoginModalProps> = (props) => {
     ) {
       props.history.push('/');
     }
-    // eslint-disable-next-line
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,10 +88,6 @@ const LoginModal: React.FC<ILoginModalProps> = (props) => {
     window.location.href = strapiUrl + 'connect/google';
   };
 
-  const loginDiscord = () => {
-    window.location.href = strapiUrl + 'connect/discord';
-  };
-
   useEffect(() => {
     if (props.loginSuccess) {
       if (loginData.rememberMe) {
@@ -132,8 +127,7 @@ const LoginModal: React.FC<ILoginModalProps> = (props) => {
           </div>
           {props.loginError ? (
             <Alert color='danger'>
-              <strong>Errore nel Login</strong> Per favore controlla le
-              credenziali.
+              <strong>Login error</strong> Please check your credentials.
             </Alert>
           ) : props.loginSuccess ? (
             <Alert color='success'>
@@ -187,8 +181,8 @@ const LoginModal: React.FC<ILoginModalProps> = (props) => {
           </Alert>
           */}
           <Alert color='warning'>
-            <span>Non sei ancora registrato?</span>{' '}
-            <Link to='/register'>Registrati subito</Link>
+            <span>Not registered?</span>{' '}
+            <Link to='/register'>Do it now!</Link>
           </Alert>
         </ModalBody>
         <ModalFooter>
@@ -199,7 +193,7 @@ const LoginModal: React.FC<ILoginModalProps> = (props) => {
             tabIndex={1}
             disabled={props.loginSuccess}
           >
-            Annulla
+            Cancel
           </Button>{' '}
           <Button
             color='primary'

@@ -7,15 +7,15 @@ import { AUTH_TOKEN_KEY } from './constans';
 axios.interceptors.request.use(
   (config) => {
     if (!config.url?.includes(BASE_MARVEL_URL)) {
-      let JWT = localStorage.getItem(AUTH_TOKEN_KEY) || '';
+      let JWT = localStorage.getItem(AUTH_TOKEN_KEY) || sessionStorage.getItem(AUTH_TOKEN_KEY) || '';
       if (JWT) JWT = JSON.parse(JWT);
       if (JWT === '') return config;
       return {
         ...config,
         headers: {
-            ...config.headers,
-            Authorization: `Bearer ${JWT}`,
-        }
+          ...config.headers,
+          Authorization: `Bearer ${JWT}`,
+        },
       };
     }
     let PRIV_KEY = localStorage.getItem('PRIVATE_API_KEY') || '';
