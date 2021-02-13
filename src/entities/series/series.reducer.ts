@@ -112,9 +112,7 @@ export const getEntities = (titleStartsWith: string = '', page: number = 0) => {
   const requestUrl = apiUrl + `?titleStartsWith=${titleStartsWith.trim()}&offset=${page * 20}`;
   const encodedUrl = encodeURI(requestUrl);
   const localCopy = localStorage.getItem(encodedUrl);
-  console.log(localCopy);
   if (localCopy) {
-    console.log(JSON.parse(localCopy));
     console.log('Using local');
     return {
       type: SUCCESS(ACTION_TYPES.FETCH_SERIES_LIST),
