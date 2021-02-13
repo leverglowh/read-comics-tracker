@@ -62,7 +62,9 @@
     "customize-cra": "^1.0.0",
     "eslint": "^7.19.0",
     "eslint-config-prettier": "^7.2.0",
+    "license-compatibility-checker": "^0.3.5",
     "prettier": "2.2.1",
     "react-app-rewired": "^2.1.6"
-  }
+  },
+  "license": "MIT"
 }
