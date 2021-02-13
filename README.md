@@ -13,7 +13,6 @@ Todo:
 
 - [x] ~~Improve UI to navigate more pages after 20 issues of a series.~~
 - [x] ~~Notify save read info success, maybe toastify?~~
-- [x] ~~Order issues by name (issue number is inside the name). Figure something out~~
-- [ ] Seach issues instead of series
-- [ ] Somehow intergrate reading orders
-
+- [x] ~~Implement a pagination bar~~
+- [ ] Implement issues searching
+- [ ] Intergrate reading orders, browser extension?
