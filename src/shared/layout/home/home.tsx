@@ -1,29 +1,39 @@
 import React, { useEffect } from 'react';
-import './home.scss';
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
+
+import { ISeries } from 'src/shared/model/series.model';
 import { IRootState } from 'src/shared/reducers';
 import { getMySeries, reset } from 'src/entities/series/series.reducer';
-import SingleSeriesCard from 'src/entities/series/components/series-card';
 import { sortReadComicsByDate } from 'src/shared/util/general-utils';
-import { ISeries } from 'src/shared/model/series.model';
+
+import SingleSeriesCard from 'src/entities/series/components/series-card';
+
+import './home.scss';
 
 export interface IHomeProps extends StateProps, DispatchProps {}
 const Home: React.FC<IHomeProps> = (props) => {
-  useEffect(() =>
-     () => {
+  useEffect(
+    () => () => {
       props.reset();
-    }
-  , [])
+    },
+    []
+  );
   useEffect(() => {
     if (props?.me?.comics) {
-      props.getMySeries(props.me.comics.sort(sortReadComicsByDate).map((c) => c.issues[0]).slice(0, 9));
+      props.getMySeries(
+        props.me.comics
+          .sort(sortReadComicsByDate)
+          .map((c) => c.issues[0])
+          .slice(0, 9)
+      );
     }
   }, [props.me]);
 
   const sortSereiesBasedOnReadOrder = (a: ISeries, b: ISeries) => {
     if (!props.me.comics) return 0;
-    return props.me.comics.findIndex(e => e.series === a.id) - props.me.comics.findIndex(e => e.series === b.id);
+    return props.me.comics.findIndex((e) => e.series === a.id) - props.me.comics.findIndex((e) => e.series === b.id);
   };
 
   const goToLogin = () => {
@@ -34,19 +44,29 @@ const Home: React.FC<IHomeProps> = (props) => {
     <div id='home-page'>
       {!props.isAuthenticated ? (
         <>
-          or here to{' '}
+          Please&nbsp;
           <Button variant='primary' type='button' onClick={goToLogin}>
             Login
           </Button>
+          &nbsp; to start tracking read comics!
         </>
+      ) : props.seriesList.length === 0 && !props.loading ? (
+        <div>
+          No history here, go to <a href='/series'>series page</a> and start tracking!
+        </div>
       ) : (
         <>
-        <h2>Last 10 read:</h2>
-        <div id="home-page-body">
-          {[...props.seriesList].sort(sortSereiesBasedOnReadOrder).map(s => (
-            <SingleSeriesCard series={s} key={s.id}/>
-          ))}
-        </div>
+          <h2>Last 10 read:</h2>
+          <div id='home-page-body'>
+            {props.loading && (
+              <div className='loading-section'>
+                <Spinner style={{ width: '2rem', height: '2rem' }} animation='grow' />
+              </div>
+            )}
+            {[...props.seriesList].sort(sortSereiesBasedOnReadOrder).map((s) => (
+              <SingleSeriesCard series={s} key={s.id} />
+            ))}
+          </div>
         </>
       )}
     </div>
@@ -56,6 +76,7 @@ const Home: React.FC<IHomeProps> = (props) => {
 const mapStateToProps = ({ authentication, series }: IRootState) => ({
   me: authentication.user,
   isAuthenticated: authentication.isAuthenticated,
+  loading: series.loading,
   seriesList: series.entities,
 });
 
