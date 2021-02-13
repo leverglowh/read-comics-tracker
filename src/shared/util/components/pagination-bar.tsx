@@ -114,7 +114,7 @@ export const PaginationBar: React.FC<IPaginationBarProps> = (props) => {
         <label htmlFor="page-jump-select" style={{ marginBottom: 0 }}>Go to page&nbsp;</label>
         <select id="page-jump-select" value={currentPage} onChange={handlePageSelection}>
           {[...Array(pagesCount)].map((_, i) => (
-            <option value={i}>
+            <option value={i} key={`select-option-${i}`}>
               {i + 1}
             </option>
           ))}

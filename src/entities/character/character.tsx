@@ -14,7 +14,7 @@ const Character: React.FC<ICharacterProps> = (props) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', gap: '10px 20px' }}>
       {props.characterList?.map((character) => (
-        <Card className='single-char'>
+        <Card className='single-char' key={character.id}>
           <Card.Title>{character.name}</Card.Title>
           <Card.Img variant="top"
             width='100%'
