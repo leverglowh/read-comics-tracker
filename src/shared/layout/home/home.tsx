@@ -56,7 +56,7 @@ const Home: React.FC<IHomeProps> = (props) => {
         </div>
       ) : (
         <>
-          <h2>Last 10 read:</h2>
+          <h2>Last 9 read:</h2>
           <div id='home-page-body'>
             {props.loading && (
               <div className='loading-section'>

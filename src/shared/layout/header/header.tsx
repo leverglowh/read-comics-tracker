@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { IRootState } from 'src/shared/reducers';
-import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Dropdown from 'react-bootstrap/Dropdown';
 
+import { IRootState } from 'src/shared/reducers';
 import { getMe } from 'src/shared/reducers/authentication';
 
 import './header.scss';
@@ -86,6 +86,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
             </div>
           )}
           <img
+            title="Clear cache"
             onClick={refresh}
             id='refresh-but'
             src={process.env.PUBLIC_URL + '/svg/refresh.svg'}
