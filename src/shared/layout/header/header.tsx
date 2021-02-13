@@ -73,10 +73,8 @@ const Header: React.FC<IHeaderProps> = (props) => {
             <Dropdown navbar show={isAccountMenuOpen} onToggle={toggleAccountMenu}>
               <Dropdown.Toggle id={props.user.username}>{props.user.username}</Dropdown.Toggle>
               <Dropdown.Menu align='right'>
-                <Dropdown.Item>
-                  <Link className='nav-link' to='/logout'>
-                    logout
-                  </Link>
+                <Dropdown.Item href="/logout">
+                  logout
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
