@@ -49,6 +49,7 @@ export default (
     case FAILURE(ACTION_TYPES.LOGIN):
       return {
         ...initialState,
+        loading: false,
         errorMessage: action.payload,
         loginError: true,
       };
@@ -70,6 +71,7 @@ export default (
     case FAILURE(ACTION_TYPES.REGISTER):
       return {
         ...initialState,
+        loading: false,
         errorMessage: action.payload,
         loginError: true,
       };
@@ -91,6 +93,7 @@ export default (
     case FAILURE(ACTION_TYPES.GET_USER_INFORMATION):
       return {
         ...initialState,
+        loading: false,
         errorMessage: action.payload,
         isAuthenticated: false,
       };
@@ -101,7 +104,6 @@ export default (
         isAuthenticated: true,
         user: action.payload.data,
       };
-
     case REQUEST(ACTION_TYPES.UPDATE_USER):
       return {
         ...state,
@@ -111,6 +113,7 @@ export default (
     case FAILURE(ACTION_TYPES.UPDATE_USER):
       return {
         ...initialState,
+        loading: false,
         errorMessage: action.payload,
         updateSuccess: false
       };

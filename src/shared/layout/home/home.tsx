@@ -42,6 +42,11 @@ const Home: React.FC<IHomeProps> = (props) => {
 
   return (
     <div id='home-page'>
+      {props.authLoading && (
+        <div className="loading-overlay">
+          <Spinner animation="border" variant="danger" />
+        </div>
+      )}
       {!props.isAuthenticated ? (
         <>
           Please&nbsp;
@@ -50,7 +55,7 @@ const Home: React.FC<IHomeProps> = (props) => {
           </Button>
           &nbsp; to start tracking read comics!
         </>
-      ) : props.seriesList.length === 0 && !props.loading ? (
+      ) : props.seriesList.length === 0 && !props.seriesLoading ? (
         <div>
           No history here, go to <a href='/series'>series page</a> and start tracking!
         </div>
@@ -58,7 +63,7 @@ const Home: React.FC<IHomeProps> = (props) => {
         <>
           <h2>Last 9 read:</h2>
           <div id='home-page-body'>
-            {props.loading && (
+            {props.seriesLoading && (
               <div className='loading-section'>
                 <Spinner style={{ width: '2rem', height: '2rem' }} animation='grow' />
               </div>
@@ -76,7 +81,8 @@ const Home: React.FC<IHomeProps> = (props) => {
 const mapStateToProps = ({ authentication, series }: IRootState) => ({
   me: authentication.user,
   isAuthenticated: authentication.isAuthenticated,
-  loading: series.loading,
+  authLoading: authentication.loading,
+  seriesLoading: series.loading,
   seriesList: series.entities,
 });
 
