@@ -23,6 +23,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
   };
 
   const refresh = () => {
+    if (props.authLoading) return;
     localStorage.clear();
     sessionStorage.clear();
     window.location.reload();
@@ -103,6 +104,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
 const mapStateToProps = ({ authentication }: IRootState) => ({
   user: authentication.user,
   isAuthenticated: authentication.isAuthenticated,
+  authLoading: authentication.loading,
 });
 
 const mapDispatchToProps = {

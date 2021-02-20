@@ -79,7 +79,9 @@ body {
 
 // shared css
 .single-char {
-  flex: 0 1 350px;
+  flex: 0 0 30%;
+  min-width: 270px !important;
+  max-width: 400px;
   margin: 10px 10px;
   .card-title {
     height: 50px;
