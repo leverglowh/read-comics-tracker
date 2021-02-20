@@ -45,7 +45,11 @@ const Header: React.FC<IHeaderProps> = (props) => {
             </Link>
           </Nav.Item>
           <Nav.Item>
-            <Link className='nav-link' to='https://github.com/leverglowh/read-comics-tracker' target='_blank'>
+            <Link
+              className='nav-link'
+              to={{ pathname: 'https://github.com/leverglowh/read-comics-tracker' }}
+              target='_blank'
+            >
               GitHub
             </Link>
           </Nav.Item>
@@ -74,9 +78,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
             <Dropdown navbar show={isAccountMenuOpen} onToggle={toggleAccountMenu}>
               <Dropdown.Toggle id={props.user.username}>{props.user.username}</Dropdown.Toggle>
               <Dropdown.Menu align='right'>
-                <Dropdown.Item href="/logout">
-                  logout
-                </Dropdown.Item>
+                <Dropdown.Item href='/logout'>logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           ) : (
@@ -87,7 +89,7 @@ const Header: React.FC<IHeaderProps> = (props) => {
             </div>
           )}
           <img
-            title="Clear cache"
+            title='Clear cache'
             onClick={refresh}
             id='refresh-but'
             src={process.env.PUBLIC_URL + '/svg/refresh.svg'}
