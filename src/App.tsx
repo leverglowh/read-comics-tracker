@@ -3,8 +3,9 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Routes from './routes';
 
-import { loadIcons } from './config/icon-loader';
 import Header from './shared/layout/header/header';
+import { loadIcons } from './config/icon-loader';
+import { updateCache } from './shared/util/api-utils';
 import { ToastContainer } from 'react-toastify';
 import { saveItemToLocalStorage } from 'src/shared/util/general-utils';
 
@@ -29,6 +30,8 @@ function App() {
       }
       saveItemToLocalStorage('PRIVATE_API_KEY', private_key);
     }
+
+    updateCache();
   }, []);
 
   loadIcons();
