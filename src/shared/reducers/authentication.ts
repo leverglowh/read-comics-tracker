@@ -14,6 +14,7 @@ export const ACTION_TYPES = {
   LOGOUT: 'authentication/LOGOUT',
   REGISTER: 'authentication/REGISTER',
   GET_USER_INFORMATION: 'authentication/USER',
+  RESET_MESSAGES: 'authentication/RESET_MESSAGES',
   UPDATE_USER: 'authentication/UPDATE_USER',
   RESET_UPDATE: 'authentication/RESET_UPDATE',
   ERROR_MESSAGE: 'authentication/ERROR_MESSAGE',
@@ -45,6 +46,8 @@ export default (
       return {
         ...state,
         loading: true,
+        loginError: false,
+        loginSuccess: false,
       };
     case FAILURE(ACTION_TYPES.LOGIN):
       return {
@@ -133,6 +136,13 @@ export default (
       return {
         ...initialState,
       };
+    case ACTION_TYPES.RESET_MESSAGES:
+      return {
+        ...state,
+        errorMessage: '',
+        loginError: false,
+        loginSuccess: false,
+      }
     case ACTION_TYPES.ERROR_MESSAGE:
       return {
         ...initialState,
@@ -204,6 +214,10 @@ export const clearAuthToken = () => {
 export const resetUpdate = () => ({
   type: ACTION_TYPES.RESET_UPDATE,
 });
+
+export const resetMessages = () => ({
+  type: ACTION_TYPES.RESET_MESSAGES,
+})
 
 export const logout = () => {
   clearAuthToken();
